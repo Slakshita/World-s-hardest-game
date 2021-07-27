@@ -54,15 +54,23 @@ var sam;
   car4 = createSprite(270,250,10,10);
   car4.shapeColor = "red";
   
-  
-  car1.velocityY = 8;
-  car2.velocityY = 8;
-  car3.velocityY = -8;
-  car4.velocityY = -8;
  
+//add the velocity to make the car move.
+car1.velocityY=8
+car2.velocityY=8
+car3.velocityY=-8
+car4.velocityY=-8
 
 function draw() {
-  background("white");
+   background("white");
+car1.bounceOff(boundary1);
+car1.bounceOff(boundary2);
+car2.bounceOff(boundary1);
+car2.bounceOff(boundary2);
+car3.bounceOff(boundary1);
+car3.bounceOff(boundary2);
+car4.bounceOff(boundary1);
+car4.bounceOff(boundary2);
   text("Lives: " + life,200,100);
   strokeWeight(0);
   fill("lightblue");
@@ -70,41 +78,23 @@ function draw() {
   fill("yellow");
   rect(345,120,52,140);
   
-  car1.bounceOff(boundary1);
-  car1.bounceOff(boundary2);
-  car2.bounceOff(boundary1);
-  car2.bounceOff(boundary2);
-  car3.bounceOff(boundary1);
-  car3.bounceOff(boundary2);
-  car4.bounceOff(boundary1);
-  car4.bounceOff(boundary2);
-  
- 
-  if(keyDown("right")){
-    sam.x = sam.x + 2;
-  }
-  if(keyDown("left")){
-    sam.x = sam.x - 2;
-  }
-  
-  if(
-     sam.isTouching(car1)||
-     sam.isTouching(car2)||
-     sam.isTouching(car3)||
-     sam.isTouching(car4))
-  {
-     sam.x = 20;
-     sam.y = 190;
-     life = life + 1;
-  }
+//Add the condition to make the sam move left and right
+if (keyDown("left")){
+sam.x = sam.x-2
+}
+if (keyDown("right")){
+sam.x = sam.x+2
+}
+//Add the condition to reduce the life of sam if it touches the car.
+if (sam.isTouching(car1) || sam.isTouching(car2)|| sam.isTouching(car3) || sam.isTouching(car4)){
+sam.x = 20
+sam.y = 190
+life = life-1
+}
+    
   
  drawSprites();
 }
-
-
-
-
-
 
 // -----
     try { window.draw = draw; } catch (e) {}
